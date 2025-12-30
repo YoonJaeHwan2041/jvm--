@@ -26,4 +26,13 @@
 - 각 메서드의 지역 변수는 독립적
 
 ### 5단계 : 참조 타입 vs 기본 타입
-`ReferenceVsPrimitive.java`
+`ReferenceVsPrimitive.java` 파일 확인
+
+### 6단계 : 실행 결과 확인
+![img.png](img.png)
+
+## 핵심 정리
+- **Method Area** : static 변수, 클래스 정보 저장(모든 스레드 공유)
+- **Stack Area** :  지역 변수, 매개변수 저장 (스레드별 생성, LIFO)
+- **Heap Area** :  객체, 배열 저장(모든 스레드 공유, GC 대상)
+- 
