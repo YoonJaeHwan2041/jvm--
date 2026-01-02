@@ -2,7 +2,6 @@ package practice.bytecode;
 
 /**
  * 바이트 코드 실습 예제
- *
  * 이 클래스를 컴파일한 후 javap 명령어로 바이트코드 확인
  */
 public class ByteCodeDemo {
