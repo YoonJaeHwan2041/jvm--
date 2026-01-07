@@ -28,18 +28,21 @@ public class GCObservationSecond {
         System.out.println("=== 1단계: 작은 객체 할당 (Eden 영역) ===");
         for (int i = 0; i < 100; i++) {
             // 1MB씩 할당 (Humongous가 아닌 작은 객체)
-            list.add(new byte[1024 * 1024]); // 1MB
+            list.add(new byte[1024 * 512]); // 512kb
 
             if (i % 20 == 0) {
                 long used = runtime.totalMemory() - runtime.freeMemory();
                 long max = runtime.maxMemory();
                 long free = runtime.freeMemory();
+                // 해당 객체가 몇 kb인지
+                System.out.println();
 
                 System.out.println("[" + i + "회 할당]");
                 System.out.println("  사용: " + (used / 1024 / 1024) + "MB");
                 System.out.println("  여유: " + (free / 1024 / 1024) + "MB");
                 System.out.println("  사용률: " + (used * 100 / max) + "%\n");
             }
+            System.out.println("나는 : " + i + " 번쨰야");
             Thread.sleep(50);
         }
 
@@ -74,16 +77,16 @@ public class GCObservationSecond {
         System.out.println("메모리 회수량: " + ((afterGC - beforeGC) / 1024 / 1024) + "MB");
 
         if (afterGC > beforeGC) {
-            System.out.println("✅ GC가 메모리를 회수했습니다!");
+            System.out.println(" GC가 메모리를 회수했습니다!");
         } else {
-            System.out.println("⚠️ GC가 실행되었지만 메모리 회수가 미미합니다.");
+            System.out.println("GC가 실행되었지만 메모리 회수가 미미합니다.");
             System.out.println("   (GC 로그를 확인하여 실제 회수 여부를 확인하세요)");
         }
 
         System.out.println("\n=== 4단계: 추가 객체 할당 (GC 재발생 관찰) ===");
         // 추가 객체 할당하여 GC 재발생 관찰
         for (int i = 0; i < 50; i++) {
-            list.add(new byte[1024 * 1024]); // 1MB
+            list.add(new byte[1024 * 512]); // 1MB
             Thread.sleep(100);
 
             if (i % 10 == 0) {
